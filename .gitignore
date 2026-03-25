@@ -1,0 +1,255 @@
+################################################################################
+# Enterprise .gitignore for:
+# - Visual Studio solution
+# - .NET 10 / ASP.NET Core
+# - Aspire AppHost / ServiceDefaults
+# - Vite + React + TypeScript frontend
+################################################################################
+
+################################################################################
+# BUILD / COMPILE OUTPUT
+################################################################################
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+out/
+publish/
+artifacts/
+dist/
+dist-ssr/
+build/
+lib/
+temp/
+tmp/
+
+################################################################################
+# TEST / COVERAGE OUTPUT
+################################################################################
+[Tt]est[Rr]esult*/
+[Tt]est[Rr]esults/
+coverage/
+coverage-*/
+coverage.*
+*.coverage
+*.coveragexml
+*.trx
+*.blg
+*.binlog
+
+################################################################################
+# VISUAL STUDIO / IDE / EDITOR
+################################################################################
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.rsuser
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+################################################################################
+# VS CODE
+# Keep shareable workspace files if desired
+################################################################################
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+################################################################################
+# NODE / JS / FRONTEND TOOLING
+################################################################################
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+.eslintcache
+.stylelintcache
+.parcel-cache/
+.next/
+.nuxt/
+.svelte-kit/
+vite.svg
+*.tsbuildinfo
+
+################################################################################
+# PACKAGE MANAGERS
+################################################################################
+.pnp.*
+.yarn/*
+!.yarn/patches/
+!.yarn/plugins/
+!.yarn/releases/
+!.yarn/sdks/
+!.yarn/versions/
+
+################################################################################
+# NUGET / .NET PACKAGE OUTPUT
+################################################################################
+*.nupkg
+*.snupkg
+*.nuspec
+.nuget/
+packages/
+!**/packages/build/
+!**/packages/repositories.config
+
+################################################################################
+# ASP.NET / WEB PUBLISHING
+################################################################################
+wwwroot/dist/
+wwwroot/build/
+wwwroot/lib/
+bundleconfig.json.bindings
+*.Publish.xml
+*.pubxml.user
+publishprofiles/
+App_Data/*.mdf
+App_Data/*.ldf
+
+################################################################################
+# LOCAL DATABASES / DEV DB FILES
+################################################################################
+*.mdf
+*.ldf
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+################################################################################
+# ENVIRONMENT FILES / SECRETS / LOCAL CONFIG
+################################################################################
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+secrets.json
+secret.*.json
+*.secrets.json
+
+# appsettings patterns:
+# Keep tracked:
+# - appsettings.json
+# - appsettings.Development.json only if your team intentionally commits it
+#
+# Ignore clearly local/private variants:
+**/appsettings.Local.json
+**/appsettings.local.json
+**/appsettings.*.local.json
+**/appsettings.Development.local.json
+**/appsettings.private.json
+**/appsettings.*.private.json
+
+################################################################################
+# AZURE / CLOUD / ASPIRE / CONTAINER LOCAL ARTIFACTS
+################################################################################
+.azure/
+.azurite/
+aspirate-state/
+docker-data/
+*.dcproj.user
+docker-compose.override.yml
+docker-compose.*.user.yml
+
+# Aspire generated manifests / local outputs, if generated during local runs
+aspire-manifest.json
+aspire-manifest.*.json
+
+# Bicep / ARM parameter local variants
+*.parameters.local.json
+
+################################################################################
+# CERTIFICATES / KEYS / SECURE MATERIAL
+################################################################################
+*.pfx
+*.snk
+*.key
+*.pem
+*.crt
+*.cer
+*.jwk
+*.jks
+
+################################################################################
+# LOGS / RUNTIME DUMPS
+################################################################################
+*.log
+logs/
+[Ll]ogs/
+*.pid
+*.seed
+*.stackdump
+*.dmp
+
+################################################################################
+# GENERATED CODE / SCAFFOLDING OUTPUT
+################################################################################
+Generated/
+generated/
+*.generated.cs
+*.g.cs
+*.g.i.cs
+*.designer.cs
+
+# Uncomment these only if you DO NOT commit EF migrations:
+# Migrations/
+
+################################################################################
+# FRONTEND / STATIC ANALYSIS CACHE
+################################################################################
+.cache/
+.cache-loader/
+.sass-cache/
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+################################################################################
+# OPERATING SYSTEM NOISE
+################################################################################
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+################################################################################
+# GIT / PATCH / MERGE TEMP FILES
+################################################################################
+*.orig
+*.rej
+
+################################################################################
+# BACKUP / TEMP FILES
+################################################################################
+*.bak
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+################################################################################
+# OPTIONAL: FRONTEND LOCK FILE POLICY
+# Keep exactly one of these if your team standardizes on it.
+# Comment out the ones you DO want committed.
+################################################################################
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml

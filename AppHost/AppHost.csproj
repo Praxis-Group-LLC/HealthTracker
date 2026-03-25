@@ -1,0 +1,21 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.1.2">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>7b8dfb70-c5b4-4412-a95f-b1e209d39366</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Backend\Backend.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.Azure.PostgreSQL" Version="*" />
+    <PackageReference Include="Aspire.Hosting.JavaScript" Version="*" />
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="*" />
+    <PackageReference Include="Aspire.Hosting.Azure.AppContainers" Version="*" />
+  </ItemGroup>
+</Project>

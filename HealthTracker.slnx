@@ -1,0 +1,11 @@
+<Solution>
+  <Project Path="AppHost/AppHost.csproj" />
+  <Project Path="Application/Application.csproj" />
+  <Project Path="Backend/Backend.csproj" />
+  <Project Path="Domain/Domain.csproj" />
+  <Project Path="frontend/frontend.esproj">
+    <BuildType Project="Debug" />
+    <Build />
+  </Project>
+  <Project Path="Infrastructure/Infrastructure.csproj" />
+</Solution>

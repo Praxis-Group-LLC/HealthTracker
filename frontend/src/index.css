@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+/* Optional plain CSS globals */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
