@@ -209,6 +209,7 @@ api.MapGet("health/check", () => Task.FromResult(Results.Ok()));
 
 app.MapDefaultEndpoints();
 app.UseFileServer();
+app.MapFallbackToFile("index.html");
 
 if (app.Environment.IsDevelopment())
 {
@@ -216,7 +217,11 @@ if (app.Environment.IsDevelopment())
     var db = scope.ServiceProvider.GetRequiredService<HealthTrackerDbContext>();
 
     await db.Database.MigrateAsync();
-    await DevelopmentDataSeeder.SeedAsync(db, app);
+
+    var deviceAuthService = scope.ServiceProvider.GetRequiredService<IDeviceAuthService>();
+    var deviceRegistrationResult = await deviceAuthService.RegisterDeviceAsync(CancellationToken.None);
+
+    await DevelopmentDataSeeder.SeedAsync(db, deviceRegistrationResult);
 }
 
 app.Run();
