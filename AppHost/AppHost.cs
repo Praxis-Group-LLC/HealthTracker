@@ -1,6 +1,6 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-var aca = builder.AddAzureContainerAppEnvironment("neuronest-aca")
+builder.AddAzureContainerAppEnvironment("neuronest-aca")
     .WithDashboard(false);
 
 var postgresServer = builder.AddAzurePostgresFlexibleServer("postgres");
@@ -9,7 +9,6 @@ var healthTrackerDb = postgresServer.AddDatabase("HealthTracker");
 var backend = builder.AddProject<Projects.Backend>("backend")
     .WithReference(healthTrackerDb)
     .WaitFor(healthTrackerDb)
-    .WithHttpEndpoint(targetPort: 8080, name: "http")
     .WithExternalHttpEndpoints()
     .WithHttpHealthCheck("/api/health/check")
     .PublishAsAzureContainerApp((infrastructure, app) =>
@@ -23,4 +22,4 @@ var webfrontend = builder.AddViteApp("webfrontend", "../frontend")
 
 backend.PublishWithContainerFiles(webfrontend, "wwwroot");
 
-builder.Build().Run();
+await builder.Build().RunAsync();
