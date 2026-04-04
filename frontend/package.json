@@ -6,12 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "start": "npm run build && node server.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "generate:api-types": "openapi-typescript http://localhost:5143/swagger/v1/swagger.json -o src/api/schema.d.ts"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "openapi-fetch": "^0.17.0",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",

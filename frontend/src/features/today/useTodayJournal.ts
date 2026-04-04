@@ -5,7 +5,11 @@ import { useDeviceAuth } from "../../auth/DeviceAuthContext";
 import type { JournalEntryDto } from "../../api/types";
 
 export function useTodayJournal(dateIso: string) {
-  const { deviceToken, isLoading: authLoading, error: authError } = useDeviceAuth();
+  const {
+    deviceToken,
+    isLoading: authLoading,
+    error: authError,
+  } = useDeviceAuth();
   const [entries, setEntries] = useState<JournalEntryDto[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>(null);
@@ -20,13 +24,15 @@ export function useTodayJournal(dateIso: string) {
 
     async function load() {
       setLoading(true);
-      setError(null);
 
       const { data, error } = await apiClient.GET("/api/JournalEntries", {
         params: { query: { from: dateIso, to: dateIso } },
       });
 
-      if (cancelled) return;
+      if (cancelled) {
+        setLoading(false);
+        return;
+      }
 
       if (error) {
         console.error(error);
@@ -46,5 +52,9 @@ export function useTodayJournal(dateIso: string) {
     };
   }, [authLoading, authError, deviceToken, dateIso]);
 
-  return { entries, loading: loading || authLoading, error: error ?? authError };
+  return {
+    entries,
+    loading: loading || authLoading,
+    error: error ?? authError,
+  };
 }

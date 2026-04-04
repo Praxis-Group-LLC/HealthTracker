@@ -2,6 +2,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useTheme } from "./theme/ThemeContext"; // adjust path as needed
+import { HomeIcon, ChartBarIcon, SparklesIcon, CogIcon, MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 
 type AppShellProps = {
   children: React.ReactNode;
@@ -17,7 +18,7 @@ export function AppShell({ children }: AppShellProps) {
       <aside className="hidden md:flex md:w-64 flex-col border-r border-zinc-200 bg-white/80 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/70">
         {/* ... logo + nav as before ... */}
         <div className="flex items-center gap-3 px-6 py-4 border-b border-zinc-200 dark:border-zinc-800">
-          <div className="h-9 w-9 rounded-2xl bg-gradient-to-br from-violet-500 to-violet-300 shadow-md dark:from-violet-500 dark:to-violet-400" />
+          <div className="h-9 w-9 rounded-2xl bg-gradient-to-br from-lavender-600 to-lavender-400 shadow-md dark:from-lavender-500 dark:to-lavender-400" />
           <div>
             <div className="text-sm font-semibold tracking-tight">
               NeuroNest
@@ -29,10 +30,10 @@ export function AppShell({ children }: AppShellProps) {
         </div>
 
         <nav className="flex-1 px-3 py-4 space-y-1 text-sm">
-          <NavItem icon="📝" label="Today" to="/today" />
-          <NavItem icon="📊" label="History" to="/history" />
-          <NavItem icon="💨" label="Coping tools" to="/coping" />
-          <NavItem icon="⚙️" label="Settings" to="/settings" />
+          <NavItem icon={HomeIcon} label="Today" to="/today" />
+          <NavItem icon={ChartBarIcon} label="History" to="/history" />
+          <NavItem icon={SparklesIcon} label="Coping tools" to="/coping" />
+          <NavItem icon={CogIcon} label="Settings" to="/settings" />
         </nav>
 
         <div className="px-4 py-4 border-t border-zinc-200 text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
@@ -45,7 +46,7 @@ export function AppShell({ children }: AppShellProps) {
         {/* Top bar */}
         <header className="flex items-center justify-between gap-4 border-b border-zinc-200 bg-white/80 px-4 py-3 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/80 md:px-6">
           <div className="flex flex-col">
-            <span className="text-[0.7rem] uppercase tracking-[0.25em] text-violet-500 dark:text-violet-300">
+            <span className="text-[0.7rem] uppercase tracking-[0.25em] text-lavender-600 dark:text-lavender-400">
               Today
             </span>
             <h1 className="text-lg font-semibold tracking-tight md:text-xl">
@@ -54,20 +55,22 @@ export function AppShell({ children }: AppShellProps) {
           </div>
 
           <div className="flex items-center gap-3">
-            <button className="hidden text-xs rounded-full border border-zinc-200 bg-zinc-100/70 px-3 py-1 text-zinc-700 shadow-sm hover:bg-violet-50 hover:border-violet-300 dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:border-violet-500 md:inline-flex">
+            <button className="hidden text-xs rounded-full border border-zinc-200 bg-zinc-100/70 px-3 py-1 text-zinc-700 shadow-sm hover:bg-lavender-50 hover:border-lavender-300 dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:border-lavender-500 md:inline-flex">
               Scripture mode
-              <span className="ml-2 h-2 w-2 rounded-full bg-violet-500 dark:bg-violet-400" />
+              <span className="ml-2 h-2 w-2 rounded-full bg-lavender-600 dark:bg-lavender-400" />
             </button>
 
             {/* Theme toggle */}
             <button
               type="button"
               onClick={toggleTheme}
-              className="flex items-center gap-1 rounded-full border border-zinc-200 bg-zinc-100/70 px-3 py-1 text-xs text-zinc-700 shadow-sm hover:border-violet-300 hover:bg-violet-50 dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:border-violet-500"
+              className="flex items-center gap-1 rounded-full border border-zinc-200 bg-zinc-100/70 px-3 py-1 text-xs text-zinc-700 shadow-sm hover:border-lavender-300 hover:bg-lavender-50 dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:border-lavender-500"
             >
-              <span className="text-sm" aria-hidden="true">
-                {isDark ? "🌙" : "☀️"}
-              </span>
+              {isDark ? (
+                <MoonIcon className="w-4 h-4 text-lavender-600 dark:text-lavender-400" />
+              ) : (
+                <SunIcon className="w-4 h-4 text-lavender-600" />
+              )}
               <span className="hidden sm:inline">
                 {isDark ? "Dark" : "Light"} mode
               </span>
@@ -85,10 +88,10 @@ export function AppShell({ children }: AppShellProps) {
         {/* Bottom nav (mobile) */}
         <nav className="md:hidden fixed inset-x-0 bottom-0 z-20 border-t border-zinc-200 bg-white/95 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/95">
           <div className="flex h-14 items-stretch justify-around text-xs text-zinc-500 dark:text-zinc-400">
-            <BottomNavItem icon="📝" label="Today" to="/today" />
-            <BottomNavItem icon="📊" label="History" to="/history" />
-            <BottomNavItem icon="💨" label="Coping" to="/coping" />
-            <BottomNavItem icon="⚙️" label="Settings" to="/settings" />
+            <BottomNavItem icon={HomeIcon} label="Today" to="/today" />
+            <BottomNavItem icon={ChartBarIcon} label="History" to="/history" />
+            <BottomNavItem icon={SparklesIcon} label="Coping" to="/coping" />
+            <BottomNavItem icon={CogIcon} label="Settings" to="/settings" />
           </div>
         </nav>
       </div>
@@ -97,12 +100,12 @@ export function AppShell({ children }: AppShellProps) {
 }
 
 type NavItemProps = {
-  icon: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   label: string;
   to: string;
 };
 
-function NavItem({ icon, label, to }: NavItemProps) {
+function NavItem({ icon: Icon, label, to }: NavItemProps) {
   return (
     <NavLink
       to={to}
@@ -110,18 +113,18 @@ function NavItem({ icon, label, to }: NavItemProps) {
         [
           "flex w-full items-center gap-2 rounded-lg px-3 py-2 transition-colors",
           isActive
-            ? "bg-violet-100 text-violet-800 dark:bg-violet-950/80 dark:text-violet-100"
+            ? "bg-lavender-100 text-lavender-800 dark:bg-lavender-950/80 dark:text-lavender-100"
             : "text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-900/70 dark:hover:text-zinc-100",
         ].join(" ")
       }
     >
-      <span className="text-base">{icon}</span>
+      <Icon className="w-5 h-5" />
       <span>{label}</span>
     </NavLink>
   );
 }
 
-function BottomNavItem({ icon, label, to }: NavItemProps) {
+function BottomNavItem({ icon: Icon, label, to }: NavItemProps) {
   return (
     <NavLink
       to={to}
@@ -129,12 +132,12 @@ function BottomNavItem({ icon, label, to }: NavItemProps) {
         [
           "flex flex-1 flex-col items-center justify-center gap-0.5",
           isActive
-            ? "text-violet-600 dark:text-violet-300"
+            ? "text-lavender-600 dark:text-lavender-400"
             : "text-zinc-500 dark:text-zinc-400",
         ].join(" ")
       }
     >
-      <span className="text-lg">{icon}</span>
+      <Icon className="w-6 h-6" />
       <span>{label}</span>
     </NavLink>
   );

@@ -49,4 +49,6 @@ output connectionString string = 'Host=${postgres.properties.fullyQualifiedDomai
 
 output name string = postgres.name
 
+output id string = postgres.id
+
 output hostName string = postgres.properties.fullyQualifiedDomainName

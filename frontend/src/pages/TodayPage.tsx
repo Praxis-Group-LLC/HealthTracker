@@ -46,10 +46,10 @@ export const TodayPage: React.FC = () => {
   }
 
   return (
-    <div className="space-y-4 md:space-y-6">
+    <div className="space-y-6 md:space-y-8">
       {/* Top row: mood + quick stats */}
-      <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-2xl border border-zinc-200 bg-white/80 p-4 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/70 md:col-span-2 space-y-4">
+      <div className="grid gap-6 md:grid-cols-3">
+        <div className="rounded-2xl border border-zinc-200 bg-white/80 p-6 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/70 md:col-span-2 space-y-4">
           <div className="flex items-center justify-between gap-2">
             <div>
               <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
@@ -59,18 +59,18 @@ export const TodayPage: React.FC = () => {
                 Log a quick snapshot of today before writing your journal.
               </p>
             </div>
-            <span className="inline-flex items-center rounded-full bg-violet-50 px-3 py-1 text-[0.7rem] font-medium text-violet-700 dark:bg-violet-950/70 dark:text-violet-200">
+            <span className="inline-flex items-center rounded-full bg-lavender-50 px-3 py-1 text-[0.7rem] font-medium text-lavender-700 dark:bg-lavender-950/70 dark:text-lavender-200">
               Device-bound · Private
             </span>
           </div>
 
-          <div className="grid gap-3 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-3">
             <MoodSelector />
             <SleepCard />
           </div>
         </div>
 
-        <div className="rounded-2xl border border-zinc-200 bg-white/80 p-4 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/70 flex flex-col justify-between">
+        <div className="rounded-2xl border border-zinc-200 bg-white/80 p-6 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/70 flex flex-col justify-between">
           <div>
             <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
               Reminder status
@@ -84,8 +84,8 @@ export const TodayPage: React.FC = () => {
               <span className="text-zinc-500 dark:text-zinc-400">
                 Daily reminder
               </span>
-              <span className="inline-flex items-center gap-2 rounded-full bg-violet-50 px-3 py-1 text-[0.7rem] font-medium text-violet-700 dark:bg-violet-950/70 dark:text-violet-200">
-                <span className="h-2 w-2 rounded-full bg-violet-500 dark:bg-violet-400" />
+              <span className="inline-flex items-center gap-2 rounded-full bg-lavender-50 px-3 py-1 text-[0.7rem] font-medium text-lavender-700 dark:bg-lavender-950/70 dark:text-lavender-200">
+                <span className="h-2 w-2 rounded-full bg-lavender-500 dark:bg-lavender-400" />
                 Enabled
               </span>
             </div>
@@ -100,13 +100,13 @@ export const TodayPage: React.FC = () => {
       </div>
 
       {/* Journal + coping / scripture */}
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-3">
         <JournalCard
           journalEntry={
             entries == null || entries.length == 0 ? null : entries[0]
           }
         />
-        <div className="space-y-4">
+        <div className="space-y-6">
           <QuickCopingCard />
           <ScriptureCard />
         </div>

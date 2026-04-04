@@ -19,7 +19,7 @@ public static class DevelopmentDataSeeder
     private static readonly Faker Faker = new();
     private const int JournalEntryCount = 60;
 
-    public static async Task SeedAsync(HealthTrackerDbContext db, DeviceRegistrationResult deviceAuthResult)
+    public static async Task SeedAsync(HealthTrackerDbContext db)
     {
         var seedUserId = UserId.New();
         var seedCopingExercise = CopingExercise.Create("BOXED_BREATHING", "Boxed Breathing",
@@ -52,12 +52,6 @@ public static class DevelopmentDataSeeder
             }
 
             await db.JournalEntries.AddRangeAsync(seedJournalEntries);
-        }
-
-        if (!await db.DeviceCredentials.AnyAsync())
-        {
-            await db.DeviceCredentials.AddAsync(DeviceCredential.CreateNew(seedUserId, deviceAuthResult.TokenHash,
-                new DateTimeOffset()));
         }
     }
 }

@@ -17,6 +17,7 @@ using Backend.Security;
 using Application.DTOs;
 using Domain.Coping;
 using Infrastructure.Persistence;
+using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,9 +66,14 @@ var connectionString = builder.Configuration.GetConnectionString("HealthTracker"
                            "Connection string 'HealthTracker' was not found. Set ConnectionStrings__HealthTracker " +
                            "or add it to Backend/appsettings.Development.json.");
 
+var csb = new NpgsqlConnectionStringBuilder(connectionString)
+{
+    SslMode = SslMode.Require
+};
+
 // Infrastructure ============================
 builder.Services.AddHealthTrackerInfrastructure(options =>
-    options.UseNpgsql(connectionString));
+    options.UseNpgsql(csb.ToString()));
 
 var app = builder.Build();
 
@@ -211,17 +217,14 @@ app.MapDefaultEndpoints();
 app.UseFileServer();
 app.MapFallbackToFile("index.html");
 
+await using var scope = app.Services.CreateAsyncScope();
+var db = scope.ServiceProvider.GetRequiredService<HealthTrackerDbContext>();
+
+await db.Database.MigrateAsync();
+
 if (app.Environment.IsDevelopment())
 {
-    await using var scope = app.Services.CreateAsyncScope();
-    var db = scope.ServiceProvider.GetRequiredService<HealthTrackerDbContext>();
-
-    await db.Database.MigrateAsync();
-
-    var deviceAuthService = scope.ServiceProvider.GetRequiredService<IDeviceAuthService>();
-    var deviceRegistrationResult = await deviceAuthService.RegisterDeviceAsync(CancellationToken.None);
-
-    await DevelopmentDataSeeder.SeedAsync(db, deviceRegistrationResult);
+    await DevelopmentDataSeeder.SeedAsync(db);
 }
 
 app.Run();

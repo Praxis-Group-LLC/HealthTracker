@@ -1,13 +1,24 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-builder.AddAzureContainerAppEnvironment("neuronest-aca")
+builder.AddAzureContainerAppEnvironment("xenonest-aca")
     .WithDashboard(false);
 
-var postgresServer = builder.AddAzurePostgresFlexibleServer("postgres");
+var keyVault = builder.AddAzureKeyVault("kv");
+
+var pgUser = builder.AddParameter("pg-user", secret: true);
+var pgPassword = builder.AddParameter("pg-password", secret: true);
+
+var pgPasswordSecret = keyVault.AddSecret("kv-pg-password", pgPassword);
+var pgUserSecret = keyVault.AddSecret("kv-pg-user", pgUser);
+
+var postgresServer = builder.AddAzurePostgresFlexibleServer("postgres")
+    .WithPasswordAuthentication(pgUser, pgPassword);
+
 var healthTrackerDb = postgresServer.AddDatabase("HealthTracker");
 
 var backend = builder.AddProject<Projects.Backend>("backend")
     .WithReference(healthTrackerDb)
+    .WithReference(keyVault)
     .WaitFor(healthTrackerDb)
     .WithExternalHttpEndpoints()
     .WithHttpHealthCheck("/api/health/check")

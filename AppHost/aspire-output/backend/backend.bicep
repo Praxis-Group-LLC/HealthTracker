@@ -1,9 +1,9 @@
 @description('The location for the resource(s) to be deployed.')
 param location string = resourceGroup().location
 
-param neuronest_aca_outputs_azure_container_apps_environment_default_domain string
+param xenonest_aca_outputs_azure_container_apps_environment_default_domain string
 
-param neuronest_aca_outputs_azure_container_apps_environment_id string
+param xenonest_aca_outputs_azure_container_apps_environment_id string
 
 param backend_containerimage string
 
@@ -17,9 +17,9 @@ param postgres_outputs_hostname string
 
 param backend_identity_outputs_clientid string
 
-param neuronest_aca_outputs_azure_container_registry_endpoint string
+param xenonest_aca_outputs_azure_container_registry_endpoint string
 
-param neuronest_aca_outputs_azure_container_registry_managed_identity_id string
+param xenonest_aca_outputs_azure_container_registry_managed_identity_id string
 
 resource backend 'Microsoft.App/containerApps@2025-02-02-preview' = {
   name: 'backend'
@@ -28,14 +28,14 @@ resource backend 'Microsoft.App/containerApps@2025-02-02-preview' = {
     configuration: {
       activeRevisionsMode: 'Single'
       ingress: {
-        external: false
+        external: true
         targetPort: int(backend_containerport)
         transport: 'http'
       }
       registries: [
         {
-          server: neuronest_aca_outputs_azure_container_registry_endpoint
-          identity: neuronest_aca_outputs_azure_container_registry_managed_identity_id
+          server: xenonest_aca_outputs_azure_container_registry_endpoint
+          identity: xenonest_aca_outputs_azure_container_registry_managed_identity_id
         }
       ]
       runtime: {
@@ -44,21 +44,13 @@ resource backend 'Microsoft.App/containerApps@2025-02-02-preview' = {
         }
       }
     }
-    environmentId: neuronest_aca_outputs_azure_container_apps_environment_id
+    environmentId: xenonest_aca_outputs_azure_container_apps_environment_id
     template: {
       containers: [
         {
           image: backend_containerimage
           name: 'backend'
           env: [
-            {
-              name: 'OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES'
-              value: 'true'
-            }
-            {
-              name: 'OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES'
-              value: 'true'
-            }
             {
               name: 'OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY'
               value: 'in_memory'
@@ -115,7 +107,7 @@ resource backend 'Microsoft.App/containerApps@2025-02-02-preview' = {
     type: 'UserAssigned'
     userAssignedIdentities: {
       '${backend_identity_outputs_id}': { }
-      '${neuronest_aca_outputs_azure_container_registry_managed_identity_id}': { }
+      '${xenonest_aca_outputs_azure_container_registry_managed_identity_id}': { }
     }
   }
 }
